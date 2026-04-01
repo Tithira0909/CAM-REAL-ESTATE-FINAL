@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard - CAM Holdings</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; background: #f4f4f4; }
+    .container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    h1 { text-align: center; }
+    form { display: flex; flex-direction: column; }
+    label { margin-top: 10px; font-weight: bold; }
+    input, textarea { padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; }
+    button { margin-top: 20px; padding: 10px; background: #007BFF; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    button:hover { background: #0056b3; }
+    #message { margin-top: 20px; text-align: center; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Upload Apartment Details</h1>
+    <form id="uploadForm">
+      <label for="title">Title</label>
+      <input type="text" id="title" name="title" required>
+
+      <label for="price">Price ($)</label>
+      <input type="number" step="0.01" id="price" name="price" required>
+
+      <label for="location">Location</label>
+      <input type="text" id="location" name="location" required>
+
+      <label for="description">Description</label>
+      <textarea id="description" name="description" rows="4" required></textarea>
+
+      <label for="image">Property Image</label>
+      <input type="file" id="image" name="image" accept="image/*" required>
+
+      <button type="submit">Upload Property</button>
+    </form>
+    <div id="message"></div>
+  </div>
+
+  <script>
+    document.getElementById('uploadForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch('http://localhost:3000/api/properties', {
+          method: 'POST',
+          body: formData
+        });
+        if (response.ok) {
+          document.getElementById('message').innerText = 'Property uploaded successfully!';
+          document.getElementById('message').style.color = 'green';
+          form.reset();
+        } else {
+          document.getElementById('message').innerText = 'Failed to upload property.';
+          document.getElementById('message').style.color = 'red';
+        }
+      } catch (error) {
+        document.getElementById('message').innerText = 'Error: ' + error.message;
+        document.getElementById('message').style.color = 'red';
+      }
+    });
+  </script>
+</body>
+</html>
