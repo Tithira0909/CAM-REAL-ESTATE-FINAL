@@ -24,8 +24,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('side-status').innerText = apt.status;
         document.getElementById('side-price').innerHTML = `LKR ${Number(apt.price).toLocaleString()} <span style="font-size: 1rem; color:#6b7280; font-weight: 500;">${apt.status === 'For Rent' ? '/Month' : ''}</span>`;
 
-        // Text blocks - Convert line breaks to HTML paragraphs
-        const formatText = (text) => text ? text.split('\n').filter(p => p.trim()).map(p => `<p>${p.trim()}</p>`).join('<div class="space24"></div>') : '<p>Not provided.</p>';
+        // Text blocks - Convert line breaks to HTML paragraphs (Legacy support for old non-HTML entries)
+        const formatText = (text) => {
+            if (!text) return '<p>Not provided.</p>';
+            if (text.trim().startsWith('<')) return text; // Bypass formatting if HTML exists
+            return text.split('\n').filter(p => p.trim()).map(p => `<p>${p.trim()}</p>`).join('<div class="space24"></div>');
+        };
         
         document.getElementById('about-property-content').innerHTML = formatText(apt.description);
         document.getElementById('detailed-desc-content').innerHTML = formatText(apt.detailed_description);
@@ -57,6 +61,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         const mainImg = document.getElementById('main-image');
         mainImg.src = imgPath;
         mainImg.alt = apt.title;
+        const mainLink = document.getElementById('main-image-link');
+        if (mainLink) mainLink.href = imgPath;
 
         // Gallery
         const galleryContainer = document.getElementById('gallery-images-container');
@@ -67,7 +73,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const gHtml = `
                     <div class="col-lg-6 col-md-6" style="margin-bottom: 24px;">
                         <div class="img1 image-anime">
-                            <img src="${safeImg}" alt="" style="height: 238px; width:100%; object-fit: cover; border-radius: 12px; background: #eee;">
+                            <a href="${safeImg}" class="property-popup">
+                                <img src="${safeImg}" alt="" style="height: 238px; width:100%; object-fit: cover; border-radius: 12px; background: #eee;">
+                            </a>
                         </div>
                     </div>
                 `;
@@ -125,6 +133,14 @@ document.addEventListener('DOMContentLoaded', async () => {
                 console.warn('Could not load more properties:', moreErr);
                 moreContainer.innerHTML = '';
             }
+        }
+        
+        // Initialize Magnific Popup for all elements with class property-popup
+        if (typeof $.fn.magnificPopup !== 'undefined') {
+            $('.property-popup').magnificPopup({
+                type: 'image',
+                gallery: { enabled: true }
+            });
         }
 
     } catch (e) {

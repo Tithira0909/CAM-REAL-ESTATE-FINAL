@@ -151,6 +151,12 @@ body, p, h1, h2, h3, h4, h5, h6, a, .text-anim, .text-anim1, .text-anime-style-3
     border-bottom-color: rgba(255,255,255,0.2) !important;
 }
 
+/* Reduce size of footer logo */
+.footer4-section-area .cta3-header img {
+    max-width: 160px;
+    height: auto;
+}
+
 /* Highlight Contact Info */
 .contact-highlight-footer {
     background: rgba(201, 168, 76, 0.1);
@@ -230,7 +236,7 @@ body, p, h1, h2, h3, h4, h5, h6, a, .text-anim, .text-anim1, .text-anime-style-3
         padding-top: 70px !important;
     }
     
-    .mobile-logo * { color: #fff; filter: brightness(10) contrast(10); }
+    .mobile-logo * { color: #fff; filter: brightness(0) invert(1); }
 
     /* Lock hamburger to vertical center perfectly without offset bugs */
     .mobile-header-elements {
