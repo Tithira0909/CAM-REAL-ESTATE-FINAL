@@ -8,3 +8,272 @@ Author URI: https://themeforest.net/user/vikinglab/portfolio
 Location:
 ============================
 */
+
+/* ===== Global Overrides ===== */
+
+/* Increase header logo size */
+.site-logo img,
+.mobile-logo img {
+    height: 60px !important;
+    width: auto !important;
+    max-width: none !important;
+}
+
+/* Google Sans Font Override */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap');
+body, p, h1, h2, h3, h4, h5, h6, a, .text-anim, .text-anim1, .text-anime-style-3, .cam-card-title, .cam-btn, .cam-card-specs span {
+    font-family: 'Open Sans', sans-serif !important;
+}
+
+/* Mobile Hero Section Overlap Fix */
+@media (max-width: 991px) {
+    .header4-section-area {
+        margin-top: 0 !important;
+        top: 0 !important;
+        position: relative;
+        padding-top: 120px !important;
+        padding-bottom: 50px !important;
+        overflow: hidden;
+    }
+    .header4-section-area .row {
+        position: static;
+    }
+    /* Move carousel to absolute background */
+    .header4-section-area .col-lg-7 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        padding: 0;
+        margin: 0;
+        background-color: #000; /* Ensure black background when dimming */
+    }
+    .header4-section-area .images, .header4-section-area .header-images-slider {
+        height: 100% !important;
+    }
+    .header4-section-area .images {
+        height: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    .header4-section-area .images img {
+        height: 100%;
+        object-fit: cover;
+        border-radius: 0 !important;
+        opacity: 0.3; /* lower opacity over black background = properly darker image */
+        filter: brightness(0.7); /* additional darkening via filter */
+    }
+    
+    /* Professional UI for Counters on Mobile */
+    .header4-section-area .counter-area {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)), url('assets/img/all-images/about-img10.png');
+        background-size: cover;
+        background-position: center;
+        border: 1px solid #c9a84c;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        padding: 20px 10px;
+        border-radius: 16px;
+        /* removed border duplicate */
+        margin-top: 40px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    .header4-section-area .counter-box {
+        flex: 1;
+        text-align: center;
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 0;
+        margin: 0;
+    }
+    .header4-section-area .counter-box.after {
+        border-right: none;
+    }
+    .header4-section-area .counter-box:last-child {
+        border-right: none;
+    }
+    .header4-section-area .counter-box h3,
+    .header4-section-area .counter-box h3 span,
+    .header4-section-area .counter-box h3 .counter,
+    .header4-section-area .counter-box h3 .counetr {
+        color: #c9a84c !important;
+        font-size: 26px !important;
+        font-weight: 700;
+        margin-bottom: 5px;
+        display: inline-block !important; /* Ensure numbers stay inline horizontally */
+    }
+    .header4-section-area .counter-box p {
+        color: #eaeaea !important;
+        font-size: 11px !important;
+        line-height: 1.3 !important;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin: 0;
+    }
+    .header4-section-area {
+        background-color: #000 !important; /* smooth backdrop fallback */
+    }
+
+    .header4-section-area .col-lg-5 {
+        position: relative;
+        z-index: 2;
+        padding: 30px;
+    }
+    .header4-section-area .hero4-header p,
+    .header4-section-area .hero4-header h1 {
+        color: #fff !important;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+}
+
+/* Footer Styling Updates */
+.footer4-section-area, .footer4-section-area .cta-bg-area {
+    background-color: #000 !important;
+}
+.footer4-section-area h3, 
+.footer4-section-area p, 
+.footer4-section-area a, 
+.footer4-section-area span, 
+.footer4-section-area li {
+    color: #fff !important;
+}
+.footer4-section-area a:hover {
+    color: #c9a84c !important;
+}
+/* Ensure the social / quick links in footer are styled nicely on black */
+.footer4-section-area .footer-header h3 {
+    border-bottom-color: rgba(255,255,255,0.2) !important;
+}
+
+/* Highlight Contact Info */
+.contact-highlight-footer {
+    background: rgba(201, 168, 76, 0.1);
+    border-left: 4px solid #c9a84c;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+.contact-highlight-footer h3 {
+    border-bottom: none !important;
+    margin-bottom: 10px !important;
+}
+
+/* Zeatra color if it exists */
+.footer4-section-area a[href*='zeatralabs'] {
+    color: #fff !important;
+}
+
+/* Smooth Hamburger Icon */
+.mobile-nav-icon.dots-menu {
+    border: none !important;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    background: transparent !important;
+}
+.mobile-nav-icon i {
+    display: none !important; /* Hide old icon if still present */
+}
+.smooth-hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+.smooth-hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #111;
+    border-radius: 3px;
+    transition: all 0.3s ease-in-out;
+}
+.mobile-nav-icon:hover .smooth-hamburger span:nth-child(1) {
+    transform: translateY(2px);
+}
+.mobile-nav-icon:hover .smooth-hamburger span:nth-child(3) {
+    transform: translateY(-2px);
+}
+
+
+/* Center mobile logo and yellow hamburger */
+@media (max-width: 991px) {
+    .mobile-header-elements {
+        justify-content: center !important;
+        position: relative;
+    }
+    .mobile-nav-icon {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .smooth-hamburger span {
+        background-color: #c9a84c !important; /* Yellow Hamburger */
+    }
+}
+
+/* Push to absolute top on mobile */
+@media (max-width: 991px) {
+    body > header { display: none !important; }
+    .mobile-header { background: transparent !important; }
+    .mobile-logo * { color: #fff; filter: brightness(10) contrast(10); }
+}
+
+
+/* Footer Layout Refinement */
+.footer4-section-area .cta-bg-area {
+    padding: 40px 30px !important;
+}
+
+.footer4-section-area .contact-highlight-footer {
+    margin-bottom: 0 !important;
+    padding: 15px !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+}
+
+.footer4-section-area .copyright {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.powered-by {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    font-size: 14px;
+}
+
+.powered-by img {
+    height: 25px;
+    width: auto;
+    transition: transform 0.3s ease;
+}
+
+.powered-by a:hover img {
+    transform: scale(1.1);
+}
+
+@media (max-width: 767px) {
+    .footer4-section-area .copyright {
+        flex-direction: column;
+        text-align: center;
+    }
+}
