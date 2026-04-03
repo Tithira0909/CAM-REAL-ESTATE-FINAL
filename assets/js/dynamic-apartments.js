@@ -108,6 +108,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     transition: color 0.2s;
                 }
                 .cam-card-title:hover { color: #c0392b; }
+                .cam-card-body > div { min-width: 0; } /* Fix long unbroken texts stretching cards */
                 .cam-card-specs {
                     display: flex;
                     gap: 14px;
@@ -249,8 +250,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         data.forEach((apt, index) => {
-            const mainImg = apt.image_url ? `/${apt.image_url}` : 'assets/img/all-images/features-img3.png';
-            const galleryImgs = (apt.gallery && apt.gallery.length > 0) ? apt.gallery.map(g => `/${g}`) : [];
+            const mainImg = apt.image_url ? (apt.image_url.startsWith('/') ? apt.image_url : `/${apt.image_url}`) : 'assets/img/all-images/features-img3.png';
+            const galleryImgs = (apt.gallery && apt.gallery.length > 0) ? apt.gallery.map(g => (g.startsWith('/') ? g : `/${g}`)) : [];
             const allImages = [mainImg, ...galleryImgs];
             const cardId = `apt-card-${apt.id || index}`;
 
@@ -330,8 +331,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         const row = container.querySelector('#featured-row');
 
         featuredData.forEach((apt, index) => {
-            const mainImg = apt.image_url ? '/' + apt.image_url : 'assets/img/all-images/features-img7.png';
-            const galleryImgs = (apt.gallery && apt.gallery.length > 0) ? apt.gallery.map(g => '/' + g) : [];
+            const mainImg = apt.image_url ? (apt.image_url.startsWith('/') ? apt.image_url : '/' + apt.image_url) : 'assets/img/all-images/features-img7.png';
+            const galleryImgs = (apt.gallery && apt.gallery.length > 0) ? apt.gallery.map(g => (g.startsWith('/') ? g : '/' + g)) : [];
             const allImages = [mainImg, ...galleryImgs];
             const cardId = 'feat-card-' + (apt.id || index);
 

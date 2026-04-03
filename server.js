@@ -218,7 +218,7 @@ app.post('/api/apartments', authenticateToken, upload.array('images', 5), async 
 
         // Image compression via sharp
         if (req.files && req.files.length > 0) {
-            const uploadDir = path.join(__dirname, 'cam-holdings-pvt-ltd', 'public', 'uploads');
+            const uploadDir = path.join(__dirname, 'assets', 'uploads');
             if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
 
             for (let i = 0; i < req.files.length; i++) {
@@ -270,7 +270,7 @@ app.put('/api/apartments/:id', authenticateToken, upload.array('images', 5), asy
         
         // Handling image overwrite if new images are uploaded
         if (req.files && req.files.length > 0) {
-            const uploadDir = path.join(__dirname, 'cam-holdings-pvt-ltd', 'public', 'uploads');
+            const uploadDir = path.join(__dirname, 'assets', 'uploads');
             let mainImage = null;
             let galleryImages = [];
 
@@ -293,7 +293,7 @@ app.put('/api/apartments/:id', authenticateToken, upload.array('images', 5), asy
             const [oldMain] = await pool.query('SELECT image_url FROM apartments WHERE id = ?', [id]);
             const [oldGallery] = await pool.query('SELECT image_url FROM apartment_images WHERE apartment_id = ?', [id]);
             [...(oldMain[0] && oldMain[0].image_url ? [oldMain[0].image_url] : []), ...oldGallery.map(g => g.image_url)].forEach(img => {
-                const p = path.join(__dirname, img);
+                const p = path.join(__dirname, 'assets', img);
                 if (fs.existsSync(p)) fs.unlinkSync(p);
             });
 
@@ -334,7 +334,7 @@ app.delete('/api/apartments/:id', authenticateToken, async (req, res) => {
         oldGallery.forEach(g => imgs.push(g.image_url));
 
         imgs.forEach(img => {
-            const p = path.join(__dirname, img);
+            const p = path.join(__dirname, 'assets', img);
             if (fs.existsSync(p)) fs.unlinkSync(p);
         });
 

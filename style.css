@@ -207,28 +207,52 @@ body, p, h1, h2, h3, h4, h5, h6, a, .text-anim, .text-anim1, .text-anime-style-3
 }
 
 
-/* Center mobile logo and yellow hamburger */
+/* Ensure mobile header is properly positioned and visible */
 @media (max-width: 991px) {
+    body, html {
+        overflow-x: hidden !important;
+        width: 100%;
+    }
+    body > header { display: none !important; }
+    
+    .mobile-header { 
+        background: #111 !important; /* Solid dark background to ensure logo and hamburger are visible everywhere */
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        z-index: 9999 !important;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        padding: 15px 0 !important;
+    }
+    /* Add padding to the body so content isn't hidden under the fixed header */
+    body {
+        padding-top: 70px !important;
+    }
+    
+    .mobile-logo * { color: #fff; filter: brightness(10) contrast(10); }
+
+    /* Lock hamburger to vertical center perfectly without offset bugs */
     .mobile-header-elements {
         justify-content: center !important;
-        position: relative;
+        position: relative !important;
+        min-height: 40px;
     }
     .mobile-nav-icon {
-        position: absolute;
-        right: 15px;
-        top: 50%;
-        transform: translateY(-50%);
+        position: absolute !important;
+        right: 15px !important;
+        top: 0 !important;
+        bottom: 0 !important;
+        margin: auto !important;
+        transform: none !important;
+        height: 40px !important;
+        display: flex !important;
+        align-items: center !important;
     }
+    
     .smooth-hamburger span {
         background-color: #c9a84c !important; /* Yellow Hamburger */
     }
-}
-
-/* Push to absolute top on mobile */
-@media (max-width: 991px) {
-    body > header { display: none !important; }
-    .mobile-header { background: transparent !important; }
-    .mobile-logo * { color: #fff; filter: brightness(10) contrast(10); }
 }
 
 

@@ -217,7 +217,7 @@
                 }
                 allProperties.forEach(apt => {
                     const badgeClass = apt.availability_status === 'Available' ? 'badge available' : 'badge sold';
-                    const img = apt.image_url ? `/${apt.image_url}` : 'assets/img/all-images/features-img3.png';
+                    const img = apt.image_url ? (apt.image_url.startsWith('/') ? apt.image_url : `/${apt.image_url}`) : 'assets/img/all-images/features-img3.png';
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
                         <td class="td-img"><img src="${img}"></td>

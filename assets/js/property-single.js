@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('key-features-container').innerHTML = featuresHtml;
 
         // Images
-        const imgPath = apt.image_url ? `/${apt.image_url}` : 'assets/img/all-images/features-img3.png';
+        const imgPath = apt.image_url ? (apt.image_url.startsWith('/') ? apt.image_url : `/${apt.image_url}`) : 'assets/img/all-images/features-img3.png';
         const mainImg = document.getElementById('main-image');
         mainImg.src = imgPath;
         mainImg.alt = apt.title;
@@ -63,10 +63,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         galleryContainer.innerHTML = '';
         if (apt.gallery && apt.gallery.length > 0) {
             apt.gallery.forEach(gImg => {
+                const safeImg = gImg.startsWith('/') ? gImg : `/${gImg}`;
                 const gHtml = `
                     <div class="col-lg-6 col-md-6" style="margin-bottom: 24px;">
                         <div class="img1 image-anime">
-                            <img src="/${gImg}" alt="" style="height: 238px; width:100%; object-fit: cover; border-radius: 12px; background: #eee;">
+                            <img src="${safeImg}" alt="" style="height: 238px; width:100%; object-fit: cover; border-radius: 12px; background: #eee;">
                         </div>
                     </div>
                 `;
@@ -87,7 +88,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 } else {
                     moreContainer.innerHTML = '';
                     others.forEach(a => {
-                        const img = a.image_url ? `/${a.image_url}` : 'assets/img/all-images/features-img3.png';
+                        const img = a.image_url ? (a.image_url.startsWith('/') ? a.image_url : `/${a.image_url}`) : 'assets/img/all-images/features-img3.png';
                         const price = a.status === 'For Rent'
                             ? `LKR ${Number(a.price).toLocaleString()} <span>/ month</span>`
                             : `LKR ${Number(a.price).toLocaleString()}`;
